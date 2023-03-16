@@ -5,9 +5,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static Retrofit retrofit;
-    private static Retrofit getClient(){
+    public static Retrofit getClient(){
          retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:8080/")
+                .baseUrl("http://192.168.56.1:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
          return retrofit;
