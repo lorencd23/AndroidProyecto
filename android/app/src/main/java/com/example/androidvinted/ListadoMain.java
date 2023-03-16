@@ -40,7 +40,7 @@ public class ListadoMain extends AppCompatActivity {
         setContentView(R.layout.activity_listado);
 
         recyclerView = (RecyclerView) findViewById(R.id.rv_products);
-        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
 
         showProducts();
 

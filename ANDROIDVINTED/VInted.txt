@@ -12,10 +12,12 @@ CONSTRAINT UQ_NOMBRE_PRODUCTO UNIQUE(NOMBRE_PRODUCTO)
 ALTER TABLE `PRODUCTOS`
   MODIFY `ID_PRODUCTO` int(3) NOT NULL AUTO_INCREMENT;
 
-INSERT INTO PRODUCTOS VALUES (0, 'Vaqueros', '19.50', 'Vaqueros rechulos', '100', 'vaqueros.png');
-INSERT INTO PRODUCTOS VALUES (0, 'Camiseta', '7.90', 'Camiseta blanca rechula', '100', 'camiseta.png');
-INSERT INTO PRODUCTOS VALUES (0, 'Chaqueta', '35.99', 'Chaqueta vaquera rechula', '100', 'chaqueta.png');
-INSERT INTO PRODUCTOS VALUES (0, 'Zapatos', '55', 'Zapatos rechulos', '100', 'zapatos.png');
+INSERT INTO PRODUCTOS VALUES (0, 'Vaqueros', '19.50', 'Vaqueros rechulos', '100', 'https://sc04.alicdn.com/kf/H11c02772a3694b99b4f1a0f8127adccf4.png');
+INSERT INTO PRODUCTOS VALUES (0, 'Camiseta', '7.90', 'Camiseta blanca rechula', '100', 'https://static.bershka.net/4/photos2/2023/V/0/2/p/2295/443/250//02/2ffb12095f40aa2c3c768482ded247d3-2295443250_1_1_0.jpg?imwidth=850&impolicy=bershka-itxmediumhigh&imformat=generic');
+INSERT INTO PRODUCTOS VALUES (0, 'Chaqueta', '35.99', 'Chaqueta vaquera rechula', '100', 'https://static.pullandbear.net/2/photos//2023/V/0/2/p/4694/530/406/4694530406_2_1_8.jpg?t=1677236681176&imwidth=563');
+INSERT INTO PRODUCTOS VALUES (0, 'Zapatillas', '55', 'Zapatillas rechulas', '100', 'https://img01.ztat.net/article/spp-media-p1/f8ca405352904f56866dd3b7c43f4a97/0840bde67acd4ede9ee60a3f7ce88cd8.jpg?imwidth=1800&filter=packshot');
+INSERT INTO PRODUCTOS VALUES (0, 'Jersey', '13.99', 'Jersey rechulo', '100', 'https://static.bershka.net/4/photos2/2023/V/0/1/p/1661/376/321/05ed6297681b8bf654a25c8c2e688879-1661376321_1_1_0.jpg?imwidth=850&impolicy=bershka-itxmediumhigh&imformat=chrome');
+INSERT INTO PRODUCTOS VALUES (0, 'Pantalón', '55', 'Pantalón rechulo', '100', 'https://static.bershka.net/4/photos2/2023/V/0/1/p/0115/168/250/20a24349ac151fd5d780630b331d1993-0115168250_1_1_0.jpg?imwidth=1920&impolicy=bershka-itxmedium&imformat=chrome');
 
 CREATE TABLE USUARIOS(
 ID_USUARIO NUMERIC(3),

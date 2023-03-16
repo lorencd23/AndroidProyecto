@@ -20,6 +20,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     private List<Products> products;
     private Context context;
+    //private String url = "http://192.168.1.138:8080/productos/img/";
 
     public ProductAdapter(List<Products> products, Context context){
         this.products = products;
@@ -37,10 +38,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ProductAdapter.ViewHolder holder, int position) {
         holder.tv_name.setText(products.get(position).getName());
-        holder.tv_imagen.setText(products.get(position).getImg());
-        holder.tv_description.setText(products.get(position).getDescription());
-        //holder.tv_prize.setText((int) products.get(position).getPrize());
+        //holder.iv_imagen.setText(products.get(position).getImg());
+        //holder.tv_description.setText(products.get(position).getDescription());
+        holder.tv_prize.setText(products.get(position).getPrize());
 
+        Glide.with(holder.itemView.getContext())
+                .load(products.get(position).getImg())
+                .into(holder.iv_imagen);
         //Glide.with(context).load(products.get(position).getName()).into(holder.tv_imagen);
     }
 
@@ -50,16 +54,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView tv_imagen;
+        private ImageView iv_imagen;
         private TextView tv_name;
         private TextView tv_prize;
-        private TextView tv_description;
+        //private TextView tv_description;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv_imagen = itemView.findViewById(R.id.tv_imagen);
+            iv_imagen = itemView.findViewById(R.id.imageView);
             tv_name = itemView.findViewById(R.id.tv_name);
             tv_prize = itemView.findViewById(R.id.tv_prize);
-            tv_description = itemView.findViewById(R.id.tv_description);
+            //tv_description = itemView.findViewById(R.id.tv_description);
         }
     }
 
