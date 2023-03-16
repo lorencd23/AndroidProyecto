@@ -1,12 +1,15 @@
 package com.example.androidvinted.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.androidvinted.ListadoMain;
 import com.example.androidvinted.R;
 import com.example.androidvinted.contract.LoginContract;
 import com.example.androidvinted.model.pojo.User;
@@ -25,7 +28,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initComponents();
-        initPresenter();
+        //initPresenter();
+        btnLogin.setOnClickListener(v ->{
+            Intent principal = new Intent(this, ListadoMain.class);
+            startActivity(principal);
+        });
     }
 
     private void initComponents(){
@@ -33,10 +40,17 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         edtEmailLogin = findViewById(R.id.Email);
         edtPasswordLogin = findViewById(R.id.Pass);
         btnLogin = findViewById(R.id.buttonLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void initPresenter(){
         loginPresenter = new LoginPresenter();
+        loginPresenter.login(null);
         loginPresenter.lstProducts(null);
     }
 

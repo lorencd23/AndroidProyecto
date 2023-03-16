@@ -8,6 +8,15 @@ public class Products {
     private int existences;
     private String img;
 
+    public Products(int idProducto, String name, double prize, String description, int existences, String img) {
+        this.idProducto = idProducto;
+        this.name = name;
+        this.prize = prize;
+        this.description = description;
+        this.existences = existences;
+        this.img = img;
+    }
+
     public int getIdProducto() {
         return idProducto;
     }

@@ -1,7 +1,6 @@
 package com.example.androidvinted;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,7 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.androidvinted.interfaces.ProductoAPI;
+import com.example.androidvinted.api.ProductoAPI;
 import com.example.androidvinted.model.pojo.Products;
 
 import retrofit2.Call;
@@ -39,12 +38,7 @@ public class ListadoMain extends AppCompatActivity {
         imagen = findViewById(R.id.imagen);
         button = findViewById(R.id.buttonBuscar);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                find(idProducto.getText().toString());
-            }
-        });
+
     }
 
     private void find(String idProducto){
@@ -59,7 +53,7 @@ public class ListadoMain extends AppCompatActivity {
                 try{
                     if(response.isSuccessful()){
                         Products p = response.body();
-                        String URL_IMG = "http://localhost:8080/img/"+p.getIdProducto()+".png";
+                        String URL_IMG = "http://localhost:8080/VintedAPI/webresources/"+p.getIdProducto()+".png";
                         name.setText(p.getName());
                         //prize.setText(p.getPrize());
                         description.setText(p.getDescription());
