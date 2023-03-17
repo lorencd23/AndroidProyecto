@@ -62,10 +62,8 @@ public class ProductoDescripcion extends AppCompatActivity {
         prize.setText(productPrice);
         description.setText(productDescription);
         existences.setText(productExistences);
-        img.setText(productImagen);
-        Glide.with(holder.itemView.getContext())
-                .load(products.get(position).getImg())
-                .into(holder.iv_imagen);
+
+        Glide.with(this).load(productImagen).into(img);
 
         //tv_name.setText();
 /*

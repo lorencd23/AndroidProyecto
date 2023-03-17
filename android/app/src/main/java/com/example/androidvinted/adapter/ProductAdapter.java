@@ -61,6 +61,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                         holder.tarjeta.getContext(),
                         ProductoDescripcion.class
                 );
+
                 screenChanger.putExtra("productId", products.get(position).getIdProducto());
                 screenChanger.putExtra("productName", products.get(position).getName());
                 screenChanger.putExtra("productPrice", products.get(position).getPrize());
