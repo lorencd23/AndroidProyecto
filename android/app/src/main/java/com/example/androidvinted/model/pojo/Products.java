@@ -5,11 +5,11 @@ public class Products {
     private String name;
     private String prize;
     private String description;
-    private int existences;
+    private String existences;
     private String img;
 
 
-    public Products(int idProducto, String name, String prize, String description, int existences, String img) {
+    public Products(int idProducto, String name, String prize, String description, String existences, String img) {
         this.idProducto = idProducto;
         this.name = name;
         this.prize = prize;
@@ -50,11 +50,11 @@ public class Products {
         this.description = description;
     }
 
-    public int getExistences() {
+    public String getExistences() {
         return existences;
     }
 
-    public void setExistences(int existences) {
+    public void setExistences(String existences) {
         this.existences = existences;
     }
 

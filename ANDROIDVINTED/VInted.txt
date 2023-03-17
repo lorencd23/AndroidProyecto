@@ -4,14 +4,15 @@ NOMBRE_PRODUCTO VARCHAR(25) NOT NULL,
 PRECIO NUMERIC(4,2) NOT NULL,
 DESCRIPCION VARCHAR(50) NOT NULL,
 EXISTENCIAS NUMERIC(4) NOT NULL,
-IMAGEN VARCHAR(40) NOT NULL,
+GENERO VARCHAR(50) NOT NULL,
+IMAGEN VARCHAR(300) NOT NULL,
 CONSTRAINT PK_PRODUCTOS PRIMARY KEY (ID_PRODUCTO),
 CONSTRAINT UQ_NOMBRE_PRODUCTO UNIQUE(NOMBRE_PRODUCTO)
 );
 
 ALTER TABLE `PRODUCTOS`
   MODIFY `ID_PRODUCTO` int(3) NOT NULL AUTO_INCREMENT;
-
+										   
 INSERT INTO PRODUCTOS VALUES (0, 'Vaqueros', '19.50', 'Vaqueros rechulos', '100', 'https://static.bershka.net/4/photos2/2023/V/0/2/p/5458/352/433/f5537bc409faa5a0b1d122c0a1d32013-5458352433_1_1_0.jpg?imwidth=1920&impolicy=bershka-itxmedium&imformat=chrome');
 INSERT INTO PRODUCTOS VALUES (0, 'Camiseta', '7.90', 'Camiseta blanca rechula', '100', 'https://static.bershka.net/4/photos2/2023/V/0/2/p/2295/443/250//02/2ffb12095f40aa2c3c768482ded247d3-2295443250_1_1_0.jpg?imwidth=850&impolicy=bershka-itxmediumhigh&imformat=generic');
 INSERT INTO PRODUCTOS VALUES (0, 'Chaqueta', '35.99', 'Chaqueta vaquera rechula', '100', 'https://static.pullandbear.net/2/photos//2023/V/0/2/p/4694/530/406/4694530406_2_1_8.jpg?t=1677236681176&imwidth=563');

@@ -15,6 +15,7 @@ import com.example.androidvinted.api.ApiClient;
 import com.example.androidvinted.api.ProductoAPI;
 import com.example.androidvinted.model.pojo.Products;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,6 +27,8 @@ public class ListadoMain extends AppCompatActivity {
     private List<Products> products;
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
+    private List<String> productNames = new ArrayList<>();
+
 
     TextView idProducto;
     TextView tv_name;
@@ -44,15 +47,6 @@ public class ListadoMain extends AppCompatActivity {
 
         showProducts();
 
-        /*
-        idProducto = findViewById(R.id.idProducto);
-        name = findViewById(R.id.name);
-        prize = findViewById(R.id.prize);
-        description = findViewById(R.id.description);
-        existences = findViewById(R.id.existences);
-        imagen = findViewById(R.id.imagen);
-        button = findViewById(R.id.buttonBuscar);
-        */
     }
 
     public void showProducts(){
@@ -63,6 +57,8 @@ public class ListadoMain extends AppCompatActivity {
                 List<Products> products  = response.body();
                 products = response.body();
                 productAdapter = new ProductAdapter(products, getApplicationContext());
+                //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, productNames);
+
                 recyclerView.setAdapter(productAdapter);
                 productAdapter.notifyDataSetChanged();
 
@@ -74,37 +70,5 @@ public class ListadoMain extends AppCompatActivity {
             }
         });
     }
-    /*
-    private void find(String idProducto){
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://localhost:8080/")
-                .addConverterFactory(GsonConverterFactory.create()).build();
-
-        ProductoAPI productoAPI = retrofit.create(ProductoAPI.class);
-        Call<Products> call = productoAPI.find(idProducto);
-        call.enqueue(new Callback<Products>() {
-            @Override
-            public void onResponse(Call<Products> call, Response<Products> response) {
-                try{
-                    if(response.isSuccessful()){
-                        Products p = response.body();
-                        String URL_IMG = "http://localhost:8080/VintedAPI/webresources/"+p.getIdProducto()+".png";
-                        name.setText(p.getName());
-                        //prize.setText(p.getPrize());
-                        description.setText(p.getDescription());
-                        //existences.setText(p.getExistences().toString());
-                        Glide.with(getApplication()).load(URL_IMG).into(imagen);
-
-                    }
-                }catch (Exception ex){
-                    Toast.makeText(ListadoMain.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Products> call, Throwable t) {
-                Toast.makeText(ListadoMain.this, "Error de conexion", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }*/
 
 }

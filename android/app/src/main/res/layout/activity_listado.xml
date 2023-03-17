@@ -6,19 +6,36 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/rv_products"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:padding="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            app:srcCompat="@drawable/vinted_logo"></ImageView>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:layout_gravity="center_vertical"
+                android:padding="20dp"
+                app:srcCompat="@drawable/vinted_logo"></ImageView>
+
+            <AutoCompleteTextView
+                android:id="@+id/busqueda"
+                android:layout_width="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:hint="Buscar..."
+                ></AutoCompleteTextView>
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -26,7 +43,7 @@
         android:id="@+id/rv_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="280px"
+        android:layout_marginTop="350px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
