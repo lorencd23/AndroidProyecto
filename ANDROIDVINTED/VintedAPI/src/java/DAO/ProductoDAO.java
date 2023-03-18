@@ -45,7 +45,8 @@ public class ProductoDAO implements DAO<Products, Integer>{
                     productos.setPrize(resultset.getDouble(3));
                     productos.setDescription(resultset.getString(4));
                     productos.setExistences(resultset.getInt(5));
-                    productos.setImg(resultset.getString(6));
+                    productos.setGenero(resultset.getString(6));
+                    productos.setImg(resultset.getString(7));
 
                     lstProductos.add(productos);
                 }
@@ -112,7 +113,8 @@ public class ProductoDAO implements DAO<Products, Integer>{
                     productos.setPrize(resultset.getDouble(3));
                     productos.setDescription(resultset.getString(4));
                     productos.setExistences(resultset.getInt(5));
-                    productos.setImg(resultset.getString(6));
+                    productos.setGenero(resultset.getString(6));
+                    productos.setImg(resultset.getString(7));
 
                     lstProductos.add(productos);
                 }

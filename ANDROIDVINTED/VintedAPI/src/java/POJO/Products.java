@@ -11,6 +11,7 @@ public class Products {
     private double prize;
     private String description;
     private int existences;
+    private String genero;
     private String img;
     
     //CONSTRUCOTRES
@@ -18,11 +19,12 @@ public class Products {
         ID++;
         this.idProducto = ID;
     }
-    public Products(String name, double prize, String description, int existences, String img) {
+    public Products(String name, double prize, String description, int existences, String genero, String img) {
         this.name = name;
         this.prize = prize;
         this.description = description;
         this.existences = existences;
+        this.genero = genero;
         this.img=img;
     }
 
@@ -67,6 +69,14 @@ public class Products {
         this.existences = existences;
     }
 
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+    
     public String getImg() {
         return img;
     }
@@ -82,6 +92,7 @@ public class Products {
                 + "Prize = " + prize + ", "
                 + "Description = " + description + ", "
                 + "Existences = " + existences + ", "
+                + "Genero = " + genero + ", "
                 + "Imagen = " + img + '}'; 
     }
     //SOBRE esto lo hace el json
@@ -94,6 +105,7 @@ public class Products {
                 + "\"PRIZE\" : " + productos.getPrize()+ ", "
                 + "\"DESCRIPTION\" : " + productos.getDescription()+ ", "
                 + "\"EXISTENCES\" : " + productos.getExistences()+ ", "
+                + "\"GENERO\" : " + productos.getGenero()+ ", "
                 + "\"IMAGEN\" : '" + productos.getImg() + "'}";
                 resp+=",";
         }

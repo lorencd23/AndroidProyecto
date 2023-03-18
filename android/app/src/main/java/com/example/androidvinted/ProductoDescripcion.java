@@ -61,7 +61,7 @@ public class ProductoDescripcion extends AppCompatActivity {
         tv_name.setText(productName);
         prize.setText(productPrice);
         description.setText(productDescription);
-        existences.setText(productExistences);
+        existences.setText(productExistences + " productos en stock");
 
         Glide.with(this).load(productImagen).into(img);
 
