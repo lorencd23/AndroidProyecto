@@ -1,6 +1,8 @@
 package com.example.androidvinted;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import com.example.androidvinted.adapter.ProductAdapter;
 import com.example.androidvinted.api.ApiClient;
 import com.example.androidvinted.api.ProductoAPI;
 import com.example.androidvinted.model.pojo.Products;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +44,21 @@ public class ListadoMain extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado);
+
+        Button addMenuBoton = findViewById(R.id.addForm);
+
+        addMenuBoton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent screenChanger = new Intent(                  //Origen y destino objeto que permite pasar de una pantalla a otra
+                        addMenuBoton.getContext(),
+                        addProducto.class
+                );
+
+                addMenuBoton.getContext().startActivity(screenChanger);
+
+            }
+        });
 
         recyclerView = (RecyclerView) findViewById(R.id.rv_products);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
