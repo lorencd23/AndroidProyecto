@@ -20,6 +20,8 @@ public interface Motor {
     abstract void disconnect();
     abstract int execute(String SQL);
     abstract ResultSet executeQuery(String sql_final);
+
+    //public Object getConnection(String sql_final);
    
     
 }

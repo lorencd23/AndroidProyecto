@@ -2,8 +2,14 @@ package com.example.androidvinted;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,10 +33,15 @@ import retrofit2.Response;
 
 public class ListadoMain extends AppCompatActivity {
 
+    private EditText mEditText;
+    private ArrayAdapter<String> mAdapter;
+
     private List<Products> products;
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
     private List<String> productNames = new ArrayList<>();
+
+    private List<Products> filteredProducts = new ArrayList<>();
 
 
     TextView idProducto;
@@ -41,11 +52,27 @@ public class ListadoMain extends AppCompatActivity {
     TextView iv_imagen;
     Button button;
 
+    EditText et_busqueda;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado);
 
+        et_busqueda = findViewById(R.id.busqueda);
+        String text = et_busqueda.getText().toString();
+
+
+
         Button addMenuBoton = findViewById(R.id.addForm);
+        Button buscar = findViewById(R.id.buscar);
+
+        buscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = et_busqueda.getText().toString();
+                showProducts(text);
+            }
+        });
 
         addMenuBoton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,22 +90,25 @@ public class ListadoMain extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rv_products);
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
 
-        showProducts();
-
     }
 
-    public void showProducts(){
-        Call<List<Products>> call = ApiClient.getClient().create(ProductoAPI.class).getProductos();
+    public void showProducts(String palabra){
+        Call<List<Products>> call = ApiClient.getClient().create(ProductoAPI.class).getProductosPorPalabra(palabra);
         call.enqueue(new Callback<List<Products>>() {
             @Override
             public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
+                response.toString();
+
                 List<Products> products  = response.body();
                 products = response.body();
                 productAdapter = new ProductAdapter(products, getApplicationContext());
+
                 //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, productNames);
 
                 recyclerView.setAdapter(productAdapter);
                 productAdapter.notifyDataSetChanged();
+                // En lugar de notificar cambios, se llama a filtrarProductos para mostrar todos los productos
+                //filtrarProductos("");
 
             }
 
@@ -88,5 +118,31 @@ public class ListadoMain extends AppCompatActivity {
             }
         });
     }
+
+    private void filtrarProductos(String palabra) {
+        ProductoAPI productoAPI = ApiClient.getClient().create(ProductoAPI.class);
+        Call<List<Products>> call = productoAPI.getProductosPorPalabra(palabra);
+        call.enqueue(new Callback<List<Products>>() {
+            @Override
+            public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
+                if (response.isSuccessful()) {
+                    List<Products> filteredProducts = response.body();
+
+                    // Aquí se actualiza la lista de productos filtrados y se establece en el adaptador del RecyclerView
+                    ListadoMain.this.filteredProducts = filteredProducts;
+                    productAdapter.setProducts(filteredProducts);
+                    productAdapter.notifyDataSetChanged();
+                } else {
+                    Log.d("TAG", "Error en la llamada: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Products>> call, Throwable t) {
+                Log.d("TAG", "Error al obtener productos", t);
+            }
+        });
+    }
+
 
 }

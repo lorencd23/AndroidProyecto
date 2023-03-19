@@ -6,15 +6,17 @@ public class Products {
     private String prize;
     private String description;
     private String existences;
+    private String genero;
     private String img;
 
 
-    public Products(int idProducto, String name, String prize, String description, String existences, String img) {
+    public Products(int idProducto, String name, String prize, String description, String existences, String genero, String img) {
         this.idProducto = idProducto;
         this.name = name;
         this.prize = prize;
         this.description = description;
         this.existences = existences;
+        this.genero = genero;
         this.img = img;
     }
 
@@ -56,6 +58,14 @@ public class Products {
 
     public void setExistences(String existences) {
         this.existences = existences;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     public String getImg() {

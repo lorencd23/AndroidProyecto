@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import Motor_SQL.MotorSQL;
 import Factory.Motor;
 import Factory.Factory;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -15,7 +16,7 @@ import Factory.Factory;
  */
 public class ProductoDAO implements DAO<Products, Integer>{
     private static final String SQL_SELECT = "SELECT * FROM PRODUCTOS WHERE 1=1 ";
-    private static final String SQL_INSERT = "INSERT INTO PRODUCTOS VALUES (";
+    private static final String SQL_INSERT = "INSERT INTO PRODUCTOS (ID_PRODUCTO, NOMBRE_PRODUCTO, PRECIO, DESCRIPCION, EXISTENCIAS, GENERO, IMAGEN) VALUES (";
 
     private Motor motor = null;
     
@@ -65,37 +66,35 @@ public class ProductoDAO implements DAO<Products, Integer>{
         ArrayList<Products> lstProductos = null;
         
         //APLICA FILTROS A LOS PRODUCTOS
-        switch (filtro) {
-            case ("MENU"):
-                sql_filtro = "";
+        switch (filtro) {                
+            case ("{Vaqueros}"):
+                sql_filtro = " AND NOMBRE_PRODUCTO LIKE '%VAQUEROS%'";
                 break;
                 
-            case ("DRINKS"):
-                sql_filtro = " AND TIPO_PRODUCTO LIKE '%CAFE%' OR TIPO_PRODUCTO LIKE '%AFFOGATO%' OR TIPO_PRODUCTO LIKE '%SMOOTHIE%' OR TIPO_PRODUCTO LIKE '%TEAS%'";
+            case ("{Camiseta}"):
+                sql_filtro = " AND NOMBRE_PRODUCTO LIKE '%CAMISETA%'";
                 break;
                 
-            case ("DESSERTS"):
-                sql_filtro = " AND TIPO_PRODUCTO LIKE '%REPOSTERIA%'";
+            case ("{Chaqueta}"):
+                sql_filtro = " AND NOMBRE_PRODUCTO LIKE '%CHAQUETA%'";
                 break;
                 
-            case ("COFFEES"):
-                sql_filtro = " AND TIPO_PRODUCTO LIKE '%CAFE%'";
+            case ("{Zapatillas}"):
+                sql_filtro = " AND NOMBRE_PRODUCTO LIKE '%ZAPATILLAS%'";
                 break;
                 
-            case ("SMOOTHIES"):
-                sql_filtro = " AND TIPO_PRODUCTO LIKE '%SMOOTHIE%'";
+            case ("{Jersey}"):
+                sql_filtro = " AND NOMBRE_PRODUCTO LIKE '%JERSEY%'";
                 break;
                 
-            case ("AFFOGATO"):
-                sql_filtro = " AND TIPO_PRODUCTO LIKE '%AFFOGATO%'";
+            case ("{Pantalón}"):
+                sql_filtro = " AND NOMBRE_PRODUCTO LIKE '%PANTALÓN%'";
                 break;
                 
-            case ("TEAS"):
-                sql_filtro = " AND TIPO_PRODUCTO LIKE '%TEAS%'";
+            case ("{Gorro}"):
+                sql_filtro = " AND NOMBRE_PRODUCTO LIKE '%GORRO%'";
                 break;
                 
-            default:
-                sql_filtro = "";
         }
         
         try {
@@ -117,6 +116,7 @@ public class ProductoDAO implements DAO<Products, Integer>{
                     productos.setImg(resultset.getString(7));
 
                     lstProductos.add(productos);
+                    
                 }
             }
             this.motor.disconnect();
@@ -127,18 +127,72 @@ public class ProductoDAO implements DAO<Products, Integer>{
         return lstProductos;
     }
     
-    public boolean add(ArrayList<String> insercion){
+    public boolean add(Products product){
         boolean añadido = false;
-        String sql_final;
-        for(String producto:insercion){
-            
-            sql_final = SQL_INSERT;
-            
-            
-            
-        }
-            
+        String sql_final = "";
+        ArrayList<Products> lstProductos = null;
         
+        try {
+            this.motor.connect();
+            sql_final = SQL_INSERT;
+            //ResultSet resultset = this.motor.executeQuery(sql_final);
+         
+            lstProductos = new ArrayList();
+
+            Products productos = new Products();
+            productos.setIdProducto(product.getIdProducto());
+            productos.setName(product.getName());
+            productos.setPrize(product.getPrize());
+            productos.setDescription(product.getDescription());
+            productos.setExistences(product.getExistences());
+            productos.setGenero(product.getGenero());
+            productos.setImg(product.getImg());
+
+            lstProductos.add(productos);
+            /*sql_final = sql_final + product.getIdProducto()
+                    + ", '" + product.getName()
+                    + "', " + product.getPrize()
+                    + ", '" + product.getDescription()
+                    + "', " + product.getExistences()
+                    + ", '" + product.getGenero()
+                    + "', " + product.getImg() + ")";*/
+            sql_final = sql_final + "0, 'Gorro', 10, 'Gorro rechulo', 100, 'Hombre', 'https')";
+            int rowsInserted = this.motor.executeUpdate(sql_final);
+
+            if (rowsInserted > 0) {
+                añadido = true;
+            }
+                
+            añadido = true;
+            this.motor.disconnect();
+        
+            
+        } catch (Exception ex) {
+                Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        /*
+        try {
+            this.motor.connect();
+            String sql = "INSERT INTO productos (nombre, precio, descripcion, existencias, imagen) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement statement = this.motor.getConnection(sql_final).prepareStatement(sql);
+            statement.setString(1, product.getName());
+            statement.setDouble(2, product.getPrize());
+            statement.setString(3, product.getDescription());
+            statement.setInt(4, product.getExistences());
+            statement.setString(5, product.getImg());
+            int rowsInserted = statement.executeUpdate();
+
+            if (rowsInserted > 0) {
+                añadido = true;
+            }
+
+            this.motor.disconnect();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        */
         return añadido;
     }
     
@@ -182,11 +236,6 @@ public class ProductoDAO implements DAO<Products, Integer>{
 
     @Override
     public void find(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean add(Products bean) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
