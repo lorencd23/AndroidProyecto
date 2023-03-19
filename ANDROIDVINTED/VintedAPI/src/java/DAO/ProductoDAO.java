@@ -94,6 +94,15 @@ public class ProductoDAO implements DAO<Products, Integer>{
             case ("{Gorro}"):
                 sql_filtro = " AND NOMBRE_PRODUCTO LIKE '%GORRO%'";
                 break;
+            case ("{Hombre}"):
+                sql_filtro = " AND GENERO LIKE '%Hombre%'";
+                break;
+            case ("{Mujer}"):
+                sql_filtro = " AND GENERO LIKE '%Mujer%'";
+                break;
+            case ("{Niño/a}"):
+                sql_filtro = " AND GENERO LIKE '%Niño/a%'";
+                break;
                 
         }
         
